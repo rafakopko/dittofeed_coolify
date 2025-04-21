@@ -44,25 +44,6 @@ services:
     networks:
       - dittofeed-network-lite
   # useful for upgrading dittofeed
-  admin-cli:
-    image: dittofeed/dittofeed-admin-cli:${IMAGE_TAG:-v0.22.0}
-    entrypoint: []
-    profiles: ["admin-cli"]
-    command: tail -f /dev/null
-    tty: true
-    logging:
-      driver: "local"
-    depends_on:
-      - postgres
-      - temporal
-      - clickhouse-server
-    environment:
-      <<: *backend-app-env
-    # README: To add local env variables uncomment the following line and add a .env file in the root directory
-    # env_file:
-    #   - .env
-    networks:
-      - dittofeed-network-lite
   temporal:
     container_name: temporal
     restart: always
